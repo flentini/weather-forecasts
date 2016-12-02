@@ -1,0 +1,24 @@
+{
+  "name": "weather-forecasts",
+  "author": "Francesco Lentini <francesco.lentini@gmail.com>",
+  "version": "0.0.1",
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "react-scripts": "0.7.0"
+  },
+  "dependencies": {
+    "async-cache": "^1.1.0",
+    "config": "^1.24.0",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  },
+  "scripts": {
+    "start": "node server/index",
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
