@@ -38,6 +38,19 @@ const getCityForecasts = (cityId) => {
                 resolve(result);
             }
         });
+    }).then((data) => {
+        return {
+            name: data.city.name,
+            country: data.city.country,
+            list: data.list.reduce((acc, value) => {
+                const weather = value.weather[0];
+                weather.date = value.dt;
+
+                acc.push(weather);
+
+                return acc;
+            }, [])
+        };
     });
 }
 
