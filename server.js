@@ -46,15 +46,18 @@ const getCityForecasts = (cityId) => {
             city: data.city.name,
             country: data.city.country,
             list: data.list.reduce((acc, value) => {
+                const day = acc[value.dt_txt.substr(0, 10)] || (acc[value.dt_txt.substr(0, 10)] = { hours: [] });
                 const weather = value.weather[0];
+
                 weather.date = value.dt;
                 weather.date_txt = value.dt_txt;
                 weather.image = `${OPENWEATHERMAP_ICON_URL}${weather.icon}.png`;
+                weather.temp = value.main.temp;
 
-                acc.push(weather);
+                day.hours.push(weather);
 
                 return acc;
-            }, [])
+            }, {})
         };
     });
 }
@@ -63,7 +66,7 @@ const app = express();
 
 app.use(morgan('combined'));
 
-app.use(express.static(path.join(__dirname, '../build')));
+app.use(express.static(path.join(__dirname, '/build')));
 
 app.get('/forecast/:cityId', (req, res, next) => {
     return getCityForecasts(req.params.cityId)
