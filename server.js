@@ -6,6 +6,9 @@ const path = require('path');
 const morgan = require('morgan');
 const request = require('request');
 
+// port the app listens to
+const PORT = process.env.PORT || config.port;
+
 // OpenWeatherMap API Endpoint
 const OPENWEATHERMAP_API_URL = 'http://api.openweathermap.org/data/2.5/forecast/city';
 
@@ -27,7 +30,7 @@ const citiesCache = new require('async-cache')({
 });
 
 /**
-* Gets forecasts by city id
+* Gets forecasts by city id and maps the response into a model
 *
 * @param {String|Number} cityId
 */
@@ -76,6 +79,12 @@ app.get('/forecast/:cityId', (req, res, next) => {
     })
 });
 
-app.listen(config.port, () => {
-    console.log('Listening on', config.port);
+app.get('/health', (req, res, next) => {
+    res.sendStatus(204);
 });
+
+app.listen(PORT, () => {
+    console.log('Listening on', PORT);
+});
+
+module.exports = app;
