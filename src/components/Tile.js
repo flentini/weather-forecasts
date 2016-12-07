@@ -4,7 +4,9 @@ import { GridTile } from 'material-ui/GridList';
 class Tile extends Component {
     render() {
         return (
-            <div> Tile </div>
+            <GridTile title={this.props.details.main}>
+                <img src={this.props.details.image} />
+            </GridTile>
         );
     }
 }

@@ -20,7 +20,9 @@ class Search extends Component {
         return (
             <AutoComplete dataSource={dataSource}
                 dataSourceConfig={dataSourceConfig}
-                floatingLabelText={dataSource.map((item) => item.label).join(', ')}
+                floatingLabelText={'Possible values: ' + dataSource.map((item) => item.label).join(', ')}
+                onNewRequest={this.props.onUpdateSearch}
+                filter={AutoComplete.caseInsensitiveFilter}
                 fullWidth={true} />
         )
     }
